@@ -1,0 +1,19 @@
+{
+    "name": "rusty town",
+    "cname": "锈镇",
+    "description": "一个宁静的小镇",
+    "places": [
+        "houses",
+        "school",
+        "library",
+        "hospital",
+        "church",
+        "inn",
+        "tavern",
+        "park",
+        "farm",
+        "town-square",
+        "business-district",
+        "government"
+    ]
+}

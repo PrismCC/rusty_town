@@ -1,0 +1,12 @@
+{
+    "name": "houses",
+    "cname": "住宅",
+    "description": "镇民们居住的房屋",
+    "activities": [],
+    "distances": {
+        "town-square": 4,
+        "business": 4,
+        "park": 3,
+        "farm": 5
+    }
+}

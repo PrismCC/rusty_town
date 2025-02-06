@@ -1,0 +1,10 @@
+{
+    "name": "hospital",
+    "cname": "医院",
+    "description": "看病，治疗与出售药物的地方",
+    "activities": [],
+    "distances": {
+        "church": 3,
+        "town-square": 4
+    }
+}

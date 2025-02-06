@@ -1,0 +1,10 @@
+{
+    "name": "library",
+    "cname": "图书馆",
+    "description": "借阅图书与学习办公的场所",
+    "activities": [],
+    "distances": {
+        "school": 3,
+        "business-district": 6
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "church",
+    "cname": "教堂",
+    "description": "祈祷与举行仪式的场所",
+    "activities": [],
+    "distances": {
+        "government": 5,
+        "town-square": 6,
+        "hospital": 3
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "name": "tavern",
+    "cname": "酒馆",
+    "description": "镇民在这里吃饭、喝酒，并作为重要的社交场所",
+    "activities": [],
+    "distances": {
+        "business-district": 4,
+        "inn": 3
+    }
+}

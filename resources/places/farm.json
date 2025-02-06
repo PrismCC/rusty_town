@@ -1,0 +1,11 @@
+{
+    "name": "farm",
+    "cname": "农场",
+    "description": "种植与收获农作物的田地",
+    "activities": [],
+    "distances": {
+        "town-square": 8,
+        "houses": 5,
+        "park": 7
+    }
+}

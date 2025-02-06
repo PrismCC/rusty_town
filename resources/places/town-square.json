@@ -1,0 +1,15 @@
+{
+    "name": "town-square",
+    "cname": "广场",
+    "description": "小镇的中心，用于举办活动与集会",
+    "activities": [],
+    "distances": {
+        "school": 4,
+        "business-district": 4,
+        "houses": 4,
+        "farm": 8,
+        "hospital": 4,
+        "church": 6,
+        "government": 6
+    }
+}

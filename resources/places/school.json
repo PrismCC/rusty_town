@@ -1,0 +1,11 @@
+{
+    "name": "school",
+    "cname": "学校",
+    "description": "教师在这里为学生授课",
+    "activities": [],
+    "distances": {
+        "library": 3,
+        "business-district": 5,
+        "town-square": 4
+    }
+}

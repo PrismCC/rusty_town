@@ -1,0 +1,11 @@
+{
+    "name": "inn",
+    "cname": "旅店",
+    "description": "部分人员留宿休息的地方",
+    "activities": [],
+    "distances": {
+        "tavern": 3,
+        "park": 4,
+        "business-district": 5
+    }
+}

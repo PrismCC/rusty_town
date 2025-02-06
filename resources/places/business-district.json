@@ -1,0 +1,15 @@
+{
+    "name": "business-district",
+    "cname": "商业区",
+    "description": "可以采购与出售物品的地方",
+    "activities": [],
+    "distances": {
+        "school": 5,
+        "library": 6,
+        "tavern": 4,
+        "inn": 5,
+        "park": 7,
+        "houses": 4,
+        "town-square": 4
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "park",
+    "cname": "公园",
+    "description": "供镇民放松娱乐的地点",
+    "activities": [],
+    "distances": {
+        "business-district": 7,
+        "inn": 4,
+        "farm": 7,
+        "houses": 3
+    }
+}

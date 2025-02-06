@@ -1,0 +1,10 @@
+{
+    "name": "government",
+    "cname": "政府",
+    "description": "处理小镇事务的办公室",
+    "activities": [],
+    "distances": {
+        "church": 5,
+        "town-square": 6
+    }
+}
