@@ -1,0 +1,8 @@
+{
+    "location": "houses",
+    "gold": 150,
+    "energy": 100,
+    "health": 60,
+    "hunger": 50,
+    "mood": 70
+}

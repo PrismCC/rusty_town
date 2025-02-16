@@ -12,7 +12,6 @@ pub struct Place {
 
 impl Place {
     pub fn read_place(path: &str) -> Place {
-        println!("Reading place from {}", path);
         let place = std::fs::read_to_string(path).expect("Unable to read file");
         let place: Place = serde_json::from_str(&place).expect("Unable to parse JSON");
         place
