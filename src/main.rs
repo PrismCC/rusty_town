@@ -1,8 +1,9 @@
-mod places;
 mod characters;
+mod places;
+use characters::character::Character;
+use characters::relationship::RelationshipManager;
 use places::place::{Place, PlaceMap};
 use places::town::Town;
-use characters::character::Character;
 
 fn main() {
     println!("Hello, Rusty Town!");
@@ -28,4 +29,12 @@ fn main() {
     let mut alice = Character::read_character("resources/characters/Alice.json");
     alice.read_status("resources/characters/initial_status/Alice.json");
     println!("{}", alice);
+
+    let mut rm = RelationshipManager::new();
+    rm.read_relationship("resources/characters/relationship.json");
+    println!("{}", rm);
+    rm.update_likeability("Alice", "Bob", 10);
+    rm.update_relationship("Alice", "Bob", "husband");
+    println!("{}", rm);
+    rm.write_relationship("resources/characters/relationship1.json");
 }
