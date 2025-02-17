@@ -1,4 +1,4 @@
-use serde_json::Value;
+use serde_json::{Value, json};
 
 #[derive(Debug)]
 pub struct Character {
@@ -17,6 +17,75 @@ pub struct Character {
 }
 
 impl Character {
+    pub fn get_name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn get_gender(&self) -> &str {
+        &self.gender
+    }
+
+    pub fn get_age(&self) -> u8 {
+        self.age
+    }
+
+    pub fn get_identity(&self) -> &str {
+        &self.identity
+    }
+
+    pub fn get_residence(&self) -> &str {
+        &self.residence
+    }
+
+    pub fn get_location(&self) -> &str {
+        &self.location
+    }
+
+    pub fn get_gold(&self) -> u32 {
+        self.gold
+    }
+
+    pub fn get_energy(&self) -> u8 {
+        self.energy
+    }
+
+    pub fn get_health(&self) -> u8 {
+        self.health
+    }
+
+    pub fn get_hunger(&self) -> u8 {
+        self.hunger
+    }
+
+    pub fn get_mood(&self) -> u8 {
+        self.mood
+    }
+
+    pub fn set_location(&mut self, location: &str) {
+        self.location =
+            location.to_string();
+    }
+
+    pub fn set_gold(&mut self, gold: u32) {
+        self.gold = gold;
+    }
+
+    pub fn set_energy(&mut self, energy: u8) {
+        self.energy = energy;
+    }
+
+    pub fn set_health(&mut self, health: u8) {
+        self.health = health;
+    }
+
+    pub fn set_hunger(&mut self, hunger: u8) {
+        self.hunger = hunger;
+    }
+
+    pub fn set_mood(&mut self, mood: u8) {
+        self.mood = mood;
+    }
+
     pub fn read_character(path: &str) -> Character {
         let json_str = std::fs::read_to_string(path).expect("Unable to read file");
         let json_value: Value = serde_json::from_str(&json_str).expect("Unable to parse JSON");
@@ -45,6 +114,19 @@ impl Character {
         self.health = json_value["health"].as_u64().unwrap() as u8;
         self.hunger = json_value["hunger"].as_u64().unwrap() as u8;
         self.mood = json_value["mood"].as_u64().unwrap() as u8;
+    }
+
+    pub fn write_status(&self, path: &str) {
+        let json_value = json!({
+            "location": self.location,
+            "gold": self.gold,
+            "energy": self.energy,
+            "health": self.health,
+            "hunger": self.hunger,
+            "mood": self.mood,
+        });
+        let file = std::fs::File::create(path).expect("Unable to create file");
+        serde_json::to_writer_pretty(file, &json_value).expect("Unable to write JSON");
     }
 }
 
