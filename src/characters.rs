@@ -1,2 +1,2 @@
 pub mod character;
-pub mod relationship;
+pub mod relation;

@@ -1,7 +1,6 @@
 mod characters;
 mod places;
 use characters::character::Character;
-use characters::relationship::RelationshipManager;
 use places::place::{Place, PlaceMap};
 use places::town::Town;
 
@@ -26,15 +25,12 @@ fn main() {
     );
     println!("");
 
-    let mut alice = Character::read_character("resources/characters/Alice.json");
-    alice.read_status("resources/characters/initial_status/Alice.json");
+    let mut alice = Character::read_character("Alice");
     println!("{}", alice);
-
-    let mut rm = RelationshipManager::new();
-    rm.read_relationship("resources/characters/relationship.json");
-    println!("{}", rm);
-    rm.update_likeability("Alice", "Bob", 10);
-    rm.update_relationship("Alice", "Bob", "husband");
-    println!("{}", rm);
-    rm.write_relationship("resources/characters/relationship1.json");
+    println!("Bob's likeability: {}", alice.get_likeability("Bob"));
+    println!("Bob's relationship: {}", alice.get_relationship("Bob"));
+    alice.set_likeability("Bob", 100);
+    alice.set_relationship("Bob", characters::relation::Relationship::Husband);
+    alice.set_gold(alice.get_gold() + 100);
+    alice.write_character("temp.json");
 }

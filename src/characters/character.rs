@@ -1,4 +1,31 @@
-use serde_json::{Value, json};
+use super::relation::Relationship;
+use serde::{Deserialize, Serialize};
+use serde_json::Value;
+use std::collections::HashMap;
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct CharacterStatus {
+    pub location: String,
+    pub gold: u32,
+    pub energy: u8,
+    pub health: u8,
+    pub hunger: u8,
+    pub mood: u8,
+
+    relations: HashMap<String, (Relationship, i8)>,
+}
+
+impl CharacterStatus {
+    pub fn read_character_status(path: &str) -> CharacterStatus {
+        let file = std::fs::File::open(path).expect("Unable to open file");
+        serde_json::from_reader(file).expect("Unable to parse JSON")
+    }
+
+    pub fn write_character_status(&self, path: &str) {
+        let file = std::fs::File::create(path).expect("Unable to create file");
+        serde_json::to_writer_pretty(file, self).expect("Unable to write JSON");
+    }
+}
 
 #[derive(Debug)]
 pub struct Character {
@@ -7,13 +34,8 @@ pub struct Character {
     age: u8,
     identity: String,
     residence: String,
- 
-    location: String,
-    gold: u32,
-    energy: u8, // 0-100
-    health: u8, // 0-100
-    hunger: u8, // 0-100
-    mood: u8,   // 50: neutral, 0: sad, 100: happy
+
+    status: CharacterStatus,
 }
 
 impl Character {
@@ -38,56 +60,100 @@ impl Character {
     }
 
     pub fn get_location(&self) -> &str {
-        &self.location
+        &self.status.location
     }
 
     pub fn get_gold(&self) -> u32 {
-        self.gold
+        self.status.gold
     }
 
     pub fn get_energy(&self) -> u8 {
-        self.energy
+        self.status.energy
     }
 
     pub fn get_health(&self) -> u8 {
-        self.health
+        self.status.health
     }
 
     pub fn get_hunger(&self) -> u8 {
-        self.hunger
+        self.status.hunger
     }
 
     pub fn get_mood(&self) -> u8 {
-        self.mood
+        self.status.mood
     }
 
     pub fn set_location(&mut self, location: &str) {
-        self.location =
-            location.to_string();
+        self.status.location = location.to_string();
     }
 
     pub fn set_gold(&mut self, gold: u32) {
-        self.gold = gold;
+        self.status.gold = gold;
     }
 
     pub fn set_energy(&mut self, energy: u8) {
-        self.energy = energy;
+        self.status.energy = energy;
     }
 
     pub fn set_health(&mut self, health: u8) {
-        self.health = health;
+        self.status.health = health;
     }
 
     pub fn set_hunger(&mut self, hunger: u8) {
-        self.hunger = hunger;
+        self.status.hunger = hunger;
     }
 
     pub fn set_mood(&mut self, mood: u8) {
-        self.mood = mood;
+        self.status.mood = mood;
     }
 
-    pub fn read_character(path: &str) -> Character {
-        let json_str = std::fs::read_to_string(path).expect("Unable to read file");
+    pub fn get_likeability(&self, name: &str) -> i8 {
+        match self.status.relations.get(name) {
+            Some((_, likeability)) => (*likeability).min(100).max(-100),
+            None => 0,
+        }
+    }
+
+    pub fn set_likeability(&mut self, name: &str, likeability: i8) {
+        match self.status.relations.get_mut(name) {
+            Some((_, old_likeability)) => {
+                *old_likeability = likeability.min(100).max(-100);
+            }
+            None => {
+                self.status
+                    .relations
+                    .insert(name.to_string(), (Relationship::Stranger, likeability));
+            }
+        }
+    }
+
+    pub fn get_relationship(&self, name: &str) -> Relationship {
+        match self.status.relations.get(name) {
+            Some((relationship, _)) => (*relationship).clone(),
+            None => Relationship::Stranger,
+        }
+    }
+
+    pub fn set_relationship(&mut self, name: &str, relationship: Relationship) {
+        match self.status.relations.get_mut(name) {
+            Some((old_relationship, _)) => {
+                *old_relationship = relationship;
+            }
+            None => {
+                self.status
+                    .relations
+                    .insert(name.to_string(), (relationship, 0));
+            }
+        }
+    }
+
+    pub fn read_character(name: &str) -> Character {
+        let character_path = format!("resources/characters/{}.json", name);
+        let initial_status_path = format!("resources/characters/initial_status/{}.json", name);
+
+        let status = CharacterStatus::read_character_status(&initial_status_path);
+
+        let json_str = std::fs::read_to_string(character_path).expect("Unable to read file");
         let json_value: Value = serde_json::from_str(&json_str).expect("Unable to parse JSON");
         let character = Character {
             name: json_value["name"].as_str().unwrap().to_string(),
@@ -95,38 +161,13 @@ impl Character {
             age: json_value["age"].as_u64().unwrap() as u8,
             identity: json_value["identity"].as_str().unwrap().to_string(),
             residence: json_value["residence"].as_str().unwrap().to_string(),
-            location: "houses".to_string(),
-            gold: 0,
-            energy: 100,
-            health: 100,
-            hunger: 100,
-            mood: 50,
+            status,
         };
         character
     }
 
-    pub fn read_status(&mut self, path: &str) {
-        let json_str = std::fs::read_to_string(path).expect("Unable to read file");
-        let json_value: Value = serde_json::from_str(&json_str).expect("Unable to parse JSON");
-        self.location = json_value["location"].as_str().unwrap().to_string();
-        self.gold = json_value["gold"].as_u64().unwrap() as u32;
-        self.energy = json_value["energy"].as_u64().unwrap() as u8;
-        self.health = json_value["health"].as_u64().unwrap() as u8;
-        self.hunger = json_value["hunger"].as_u64().unwrap() as u8;
-        self.mood = json_value["mood"].as_u64().unwrap() as u8;
-    }
-
-    pub fn write_status(&self, path: &str) {
-        let json_value = json!({
-            "location": self.location,
-            "gold": self.gold,
-            "energy": self.energy,
-            "health": self.health,
-            "hunger": self.hunger,
-            "mood": self.mood,
-        });
-        let file = std::fs::File::create(path).expect("Unable to create file");
-        serde_json::to_writer_pretty(file, &json_value).expect("Unable to write JSON");
+    pub fn write_character(&self, status_path: &str) {
+        self.status.write_character_status(status_path);
     }
 }
 
@@ -140,12 +181,17 @@ impl std::fmt::Display for Character {
             location: {}\n\
             gold: {}\n\
             energy: {}  health: {}  hunger: {}  mood: {}\n",
-            self.name, 
-            self.gender, self.age, 
-            self.identity, self.residence, 
-            self.location, 
-            self.gold, 
-            self.energy, self.health, self.hunger, self.mood
+            self.name,
+            self.gender,
+            self.age,
+            self.identity,
+            self.residence,
+            self.status.location,
+            self.status.gold,
+            self.status.energy,
+            self.status.health,
+            self.status.hunger,
+            self.status.mood
         )
     }
 }

@@ -4,5 +4,9 @@
     "energy": 100,
     "health": 80,
     "hunger": 40,
-    "mood": 50
+    "mood": 50,
+    "relations": {
+        "Bob": ["Girlfriend", 80],
+        "Daisy": ["Friend", 50]
+    }
 }
