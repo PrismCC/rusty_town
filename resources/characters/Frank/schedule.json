@@ -1,0 +1,44 @@
+{
+    "schedules": [
+        {
+            "name": "Farm Work",
+            "when": [7, 0],
+            "place": "farm",
+            "activity": "work",
+            "duration": [3, 0],
+            "repeat": 127
+        },
+        {
+            "name": "Fishing at Park",
+            "when": [15, 0],
+            "place": "park",
+            "activity": "fish",
+            "duration": [2, 0],
+            "repeat": 62
+        },
+        {
+            "name": "Drink at Tavern",
+            "when": [18, 0],
+            "place": "tavern",
+            "activity": "drink",
+            "duration": [2, 0],
+            "repeat": 1
+        },
+        {
+            "name": "Sleep",
+            "when": [21, 30],
+            "place": "farm",
+            "activity": "sleep",
+            "duration": [8, 0],
+            "repeat": 127
+        },
+        {
+            "name": "Chat with Godot",
+            "when": [15, 0],
+            "place": "government",
+            "activity": "chat",
+            "duration": [1, 0],
+            "repeat": 64
+        }
+    ]
+}

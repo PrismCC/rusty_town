@@ -5,5 +5,7 @@
     "health": 60,
     "hunger": 20,
     "mood": 50,
-    "relations": {}
+    "relations": {
+        "Frank": ["Acquaintance", 20]
+    }
 }

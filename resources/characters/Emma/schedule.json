@@ -1,0 +1,52 @@
+{
+    "schedules": [
+        {
+            "name": "Praying at Church",
+            "when": [7, 0],
+            "place": "church",
+            "activity": "pray",
+            "duration": [0, 30],
+            "repeat": 127
+        },
+        {
+            "name": "Morning Shift",
+            "when": [9, 0],
+            "place": "hospital",
+            "activity": "work",
+            "duration": [2, 0],
+            "repeat": 126
+        },
+        {
+            "name": "Cook for Charles",
+            "when": [11, 30],
+            "place": "houses",
+            "activity": "cook",
+            "duration": [0, 30],
+            "repeat": 126
+        },
+        {
+            "name": "Lunch with Charles",
+            "when": [12, 0],
+            "place": "houses",
+            "activity": "eat",
+            "duration": [0, 30],
+            "repeat": 126
+        },
+        {
+            "name": "Afternoon Shift",
+            "when": [14, 0],
+            "place": "hospital",
+            "activity": "work",
+            "duration": [3, 0],
+            "repeat": 126
+        },
+        {
+            "name": "Sleep",
+            "when": [22, 0],
+            "place": "houses",
+            "activity": "sleep",
+            "duration": [8, 0],
+            "repeat": 127
+        }
+    ]
+}

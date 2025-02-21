@@ -1,28 +1,21 @@
 use std::ops::{Add, Sub};
 
+#[derive(Debug, Clone, Copy, Eq, PartialEq)]
 pub struct Time {
-    pub day: u32,
+    pub day: u16,
     pub hour: u8,
     pub minute: u8,
 }
 
 impl Time {
-    pub fn new(hour: u8, minute: u8) -> Time {
-        Time {
-            hour,
-            minute,
-            day: 0,
-        }
-    }
-
-    pub fn new(day: u32, hour: u8, minute: u8) -> Time {
+    pub fn new(hour: u8, minute: u8, day: u16) -> Time {
         Time { hour, minute, day }
     }
 }
 
 impl std::fmt::Display for Time {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        if (self.day == 0) {
+        if self.day == 0 {
             write!(f, "{:02}:{:02}", self.hour, self.minute)
         } else {
             write!(f, "{}d {:02}:{:02}", self.day, self.hour, self.minute)
@@ -54,23 +47,46 @@ impl Sub for Time {
     type Output = Time;
 
     fn sub(self, other: Time) -> Time {
-        let mut day = self.day;
-        let mut hour = self.hour - other.hour;
-        let mut minute = self.minute - other.minute;
-        if minute < 0 {
-            hour -= 1;
-            minute += 60;
+        let mut s = self;
+        let mut o = other;
+        if self.minute < other.minute {
+            s.minute += 60;
+            o.hour += 1;
         }
-        if hour < 0 {
-            day -= 1;
-            hour += 24;
+        if self.hour < other.hour {
+            s.hour += 24;
+            o.day += 1;
         }
-        day -= other.day;
-        Time { day, hour, minute }
+        if s.day < o.day {
+            panic!("Time subtraction resulted in negative time");
+        }
+        Time {
+            day: s.day - o.day,
+            hour: s.hour - o.hour,
+            minute: s.minute - o.minute,
+        }
     }
 }
 
-#[derive(Debug)]
+impl Ord for Time {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        if self.day != other.day {
+            self.day.cmp(&other.day)
+        } else if self.hour != other.hour {
+            self.hour.cmp(&other.hour)
+        } else {
+            self.minute.cmp(&other.minute)
+        }
+    }
+}
+
+impl PartialOrd for Time {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+#[derive(Debug, Clone, Copy)]
 pub enum Weekday {
     Sunday,
     Monday,

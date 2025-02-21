@@ -1,0 +1,60 @@
+{
+    "schedules": [
+        {
+            "name": "Morning Class",
+            "when": [8, 0],
+            "place": "school",
+            "activity": "teach",
+            "duration": [3, 0],
+            "repeat": 62
+        },
+        {
+            "name": "Afternoon Class",
+            "when": [14, 0],
+            "place": "school",
+            "activity": "teach",
+            "duration": [2, 0],
+            "repeat": 62
+        },
+        {
+            "name": "Marking Assignments",
+            "when": [13, 30],
+            "place": "school",
+            "activity": "mark",
+            "duration": [0, 30],
+            "repeat": 62
+        },
+        {
+            "name": "Exercise at Park",
+            "when": [19, 0],
+            "place": "park",
+            "activity": "exercise",
+            "duration": [0, 30],
+            "repeat": 126
+        },
+        {
+            "name": "Reading at home",
+            "when": [22, 0],
+            "place": "houses",
+            "activity": "read",
+            "duration": [0, 30],
+            "repeat": 126
+        },
+        {
+            "name": "Sleep",
+            "when": [23, 0],
+            "place": "houses",
+            "activity": "sleep",
+            "duration": [8, 0],
+            "repeat": 127
+        },
+        {
+            "name": "Date with Alice",
+            "when": [19, 0],
+            "place": "town-square",
+            "activity": "date",
+            "duration": [3, 0],
+            "repeat": 1
+        }
+    ]
+}

@@ -1,5 +1,6 @@
 mod characters;
 mod places;
+mod time;
 use characters::character::Character;
 use places::place::{Place, PlaceMap};
 use places::town::Town;
@@ -32,5 +33,7 @@ fn main() {
     alice.set_likeability("Bob", 100);
     alice.set_relationship("Bob", characters::relation::Relationship::Husband);
     alice.set_gold(alice.get_gold() + 100);
-    alice.write_character("temp.json");
+    alice.write_character("tmp/Alice.json");
+
+    println!("{:?}", alice.get_schedule());
 }

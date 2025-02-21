@@ -1,0 +1,44 @@
+{
+    "schedules": [
+        {
+            "name": "Morning Work",
+            "when": [8, 0],
+            "place": "government",
+            "activity": "work",
+            "duration": [3, 0],
+            "repeat": 126
+        },
+        {
+            "name": "Afternoon Work",
+            "when": [13, 0],
+            "place": "government",
+            "activity": "work",
+            "duration": [2, 0],
+            "repeat": 126
+        },
+        {
+            "name": "Chat with Frank",
+            "when": [15, 0],
+            "place": "government",
+            "activity": "chat",
+            "duration": [1, 0],
+            "repeat": 64
+        },
+        {
+            "name": "Sleep",
+            "when": [22, 0],
+            "place": "government",
+            "activity": "sleep",
+            "duration": [8, 0],
+            "repeat": 126
+        },
+        {
+            "name": "Government Report",
+            "when": [10, 0],
+            "place": "church",
+            "activity": "report",
+            "duration": [1, 0],
+            "repeat": 1
+        }
+    ]
+}

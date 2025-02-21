@@ -1,0 +1,60 @@
+{
+    "schedules": [
+        {
+            "name": "Morning Class",
+            "when": [8, 0],
+            "place": "school",
+            "activity": "study",
+            "duration": [3, 0],
+            "repeat": 62
+        },
+        {
+            "name": "Lunch at home",
+            "when": [12, 0],
+            "place": "houses",
+            "activity": "eat",
+            "duration": [0, 30],
+            "repeat": 62
+        },
+        {
+            "name": "Afternoon Class",
+            "when": [14, 0],
+            "place": "school",
+            "activity": "study",
+            "duration": [2, 0],
+            "repeat": 62
+        },
+        {
+            "name": "Doing Homework",
+            "when": [19, 0],
+            "place": "houses",
+            "acticity": "do homework",
+            "duration": [1, 0],
+            "repeat": 126
+        },
+        {
+            "name": "Watching TV",
+            "when": [20, 0],
+            "place": "houses",
+            "activity": "watch TV",
+            "duration": [1, 0],
+            "repeat": 127
+        },
+        {
+            "name": "Playing Basketball",
+            "when": [15, 0],
+            "place": "town-square",
+            "activity": "play basketball",
+            "duration": [2, 0],
+            "repeat": 64
+        },
+        {
+            "name": "Sleep",
+            "when": [21, 30],
+            "place": "houses",
+            "activity": "sleep",
+            "duration": [9, 0],
+            "repeat": 127
+        }
+    ]
+}

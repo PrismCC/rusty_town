@@ -1,4 +1,5 @@
-use super::relation::Relationship;
+use super::schedule::Schedule;
+use super::{relation::Relationship, schedule};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::collections::HashMap;
@@ -36,6 +37,7 @@ pub struct Character {
     residence: String,
 
     status: CharacterStatus,
+    schedule: Schedule,
 }
 
 impl Character {
@@ -147,13 +149,20 @@ impl Character {
         }
     }
 
+    pub fn get_schedule(&self) -> &Schedule {
+        &self.schedule
+    }
+
     pub fn read_character(name: &str) -> Character {
-        let character_path = format!("resources/characters/{}.json", name);
-        let initial_status_path = format!("resources/characters/initial_status/{}.json", name);
+        let attributes_path = format!("resources/characters/{}/attributes.json", name);
+        let status_path = format!("resources/characters/{}/initial_status.json", name);
+        let schedule_path = format!("resources/characters/{}/schedule.json", name);
 
-        let status = CharacterStatus::read_character_status(&initial_status_path);
+        let status = CharacterStatus::read_character_status(&status_path);
+        let mut schedule = Schedule::new();
+        schedule.read_transactions(&schedule_path);
 
-        let json_str = std::fs::read_to_string(character_path).expect("Unable to read file");
+        let json_str = std::fs::read_to_string(attributes_path).expect("Unable to read file");
         let json_value: Value = serde_json::from_str(&json_str).expect("Unable to parse JSON");
         let character = Character {
             name: json_value["name"].as_str().unwrap().to_string(),
@@ -162,6 +171,7 @@ impl Character {
             identity: json_value["identity"].as_str().unwrap().to_string(),
             residence: json_value["residence"].as_str().unwrap().to_string(),
             status,
+            schedule,
         };
         character
     }

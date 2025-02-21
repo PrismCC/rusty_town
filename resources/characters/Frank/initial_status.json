@@ -6,6 +6,6 @@
     "hunger": 30,
     "mood": 80,
     "relations": {
-        "Charles": ["Teacher", 40]
+        "Godot": ["Acquaintance", 30]
     }
 }

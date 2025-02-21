@@ -1,0 +1,52 @@
+{
+    "schedules": [
+        {
+            "name": "Morning Work",
+            "when": [8, 0],
+            "place": "business-district",
+            "activity": "sale",
+            "duration": [2, 0],
+            "repeat": 126
+        },
+        {
+            "name": "Afternoon Work",
+            "when": [14, 0],
+            "place": "business-district",
+            "activity": "sale",
+            "duration": [3, 0],
+            "repeat": 126
+        },
+        {
+            "name": "Drink at Tavern",
+            "when": [18, 0],
+            "place": "tavern",
+            "activity": "drink",
+            "duration": [1, 0],
+            "repeat": 72
+        },
+        {
+            "name": "Sleep",
+            "when": [22, 0],
+            "place": "houses",
+            "activity": "sleep",
+            "duration": [8, 0],
+            "repeat": 127
+        },
+        {
+            "name": "Reading at Library",
+            "when": [15, 0],
+            "place": "library",
+            "activity": "read",
+            "duration": [2, 0],
+            "repeat": 1
+        },
+        {
+            "name": "Date with Bob",
+            "when": [19, 0],
+            "place": "town-square",
+            "activity": "date",
+            "duration": [3, 0],
+            "repeat": 1
+        }
+    ]
+}
